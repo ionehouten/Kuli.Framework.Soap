@@ -5,7 +5,7 @@ Library MVC Untuk C# (SOAP/WCF) Service, dikhususkan untuk :
 - C# Programming SOAP atau WCF Service
 - Para Kuli-Kuli IT (Programmer) (Tukang:Dalam Bahasa Bangunan)
 - Para Kuli-Kuli IT (Sangkuriang Mode ON) (Program Harus Beres Dalam 1 Malam)
-- TIDAK DI PERUNTUKAN UNTUK ANALIS (Analis Mah Mandor Cukup Tunjuk-Tunjuk Pake Curuk)
+- TIDAK DI PERUNTUKAN UNTUK ANALIS APALAGI PM (Analis Mah Mandor Cukup Tunjuk-Tunjuk Pake Curuk) PM?? ASUDahlah
 
 Kelebihan 
 - Mudah
