@@ -26,7 +26,7 @@ namespace Kuli.Framework.Soap
         }
 
         public IAsyncResult result = null;
-        public virtual void AfterExecuteData(Object output, Exception ex =null) { }
+        public virtual void AfterExecuteData(Object output, Exception ex = null) { }
         public virtual void AfterLoadData(Object output, Exception ex = null) { }
         public virtual void BeforeExecuteData() { }
         public virtual void BeforeLoadData() { }
@@ -43,7 +43,7 @@ namespace Kuli.Framework.Soap
                 crudoutput = crudclient.GetType().GetMethod("Endexecute").Invoke(crudclient, new Object[] { this.result });
                 crudclient.GetType().GetMethod("Close").Invoke(crudclient, new Object[] { });
 
-               
+
                 this.AfterExecuteData(crudoutput);
                 return crudoutput;
             }
@@ -90,7 +90,7 @@ namespace Kuli.Framework.Soap
             //Object obj = await Task.FromResult<Object>(ExecuteDataDownload(input));
             //return obj;
         }
-        public virtual void LoadData(dynamic input, BindingSource source , Control control , Boolean more = false)
+        public virtual void LoadData(dynamic input, BindingSource source, Control control, Boolean more = false)
         {
             this.BeforeLoadData();
             dynamic selectclient = Activator.CreateInstance(SelectClient);
@@ -102,8 +102,8 @@ namespace Kuli.Framework.Soap
                 this.result.AsyncWaitHandle.WaitOne();
                 this.result.AsyncWaitHandle.Close();
                 selectoutput = selectclient.GetType().GetMethod("Endexecute").Invoke(selectclient, new Object[] { this.result });
-                selectclient.GetType().GetMethod("Close").Invoke(selectclient, new Object[] {});
-                
+                selectclient.GetType().GetMethod("Close").Invoke(selectclient, new Object[] { });
+
                 selectoutput = selectoutput.GetType().GetProperty(SelectMember).GetValue(selectoutput);
 
                 if (control != null)
@@ -122,7 +122,7 @@ namespace Kuli.Framework.Soap
                                 foreach (var item in data)
                                 {
                                     Object row = item;
-                                   
+
                                     var objFieldNames = row.GetType().GetProperties(flags).Cast<PropertyInfo>().
                                     Select(x => new
                                     {
@@ -154,8 +154,8 @@ namespace Kuli.Framework.Soap
                                 data = dataConvert;
                                 dataConvert = null;
                             }
-                         
-                            
+
+
                             if (more == false || source.DataSource == null)
                             {
                                 SelectList = new List<dynamic>();
@@ -169,14 +169,14 @@ namespace Kuli.Framework.Soap
                                 {
                                     source.DataSource = SelectRow;
                                 }
-                               
+
                             }
                             else
                             {
                                 SelectList.AddRange(data);
                             }
                             data = null;
-                            
+
                             source.ResetBindings(false);
                             source.ResetCurrentItem();
 
@@ -191,9 +191,9 @@ namespace Kuli.Framework.Soap
             catch (Exception ex)
             {
                 source.DataSource = SelectRow;
-                this.AfterLoadData(selectoutput,ex);
+                this.AfterLoadData(selectoutput, ex);
             }
-            
+
         }
         public virtual dynamic LoadData(dynamic input)
         {
@@ -210,7 +210,7 @@ namespace Kuli.Framework.Soap
                 selectclient.GetType().GetMethod("Close").Invoke(selectclient, new Object[] { });
 
                 selectoutput = selectoutput.GetType().GetProperty(SelectMember).GetValue(selectoutput);
-                
+
                 List<dynamic> listData = new List<dynamic>();
                 listData.AddRange(selectoutput);
                 this.AfterLoadData(listData);
@@ -220,17 +220,25 @@ namespace Kuli.Framework.Soap
             catch (Exception ex)
             {
                 this.AfterLoadData(selectoutput, ex);
-                return null;
+                return new List<dynamic>();
             }
 
         }
         public virtual async Task LoadDataTask(dynamic input, BindingSource source, Control control, Boolean more = false)
         {
-            await Task.Run(() =>
+            try
             {
-                LoadData(input, source, control, more);
+                await Task.Run(() =>
+                {
+                    LoadData(input, source, control, more);
 
-            });
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
         public virtual async Task<dynamic> LoadDataTask(dynamic input)
         {

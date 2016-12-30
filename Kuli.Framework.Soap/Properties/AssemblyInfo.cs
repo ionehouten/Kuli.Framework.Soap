@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kuli Framework For SOAP")]
-[assembly: AssemblyDescription("SANGKURIANG MODE ON")]
+[assembly: AssemblyTitle("KULI FRAMEWORK")]
+[assembly: AssemblyDescription("FOR SOAP/WCF SERVICE AND SANGKURIANG MODE ON")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("WTF <ione.thea27@gmail.com>")]
 [assembly: AssemblyProduct("Kuli.Framework.Soap")]
