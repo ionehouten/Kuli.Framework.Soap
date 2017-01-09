@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kuli.Framework.Soap
 {
     public interface IController
     {
-        void LoadData();
+        Task LoadData();
 
-        void MoreData();
+        Task MoreData();
 
         Object GetRow();
         
